@@ -92,6 +92,8 @@ export default function SearchLocation() {
 
         setCombinedLocations(combinedDataArray)
 
+        // get out outtaaa here
+
         // refresh the server component to display the current combined locations data
         setTimeout(() => {
             router.refresh()
