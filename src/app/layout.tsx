@@ -3,10 +3,13 @@ import './globals.css'
 import type { Metadata } from 'next'
 
 
+
 export const metadata: Metadata = {
   title: 'mobriella',
   description: 'daily weather companion',
 }
+
+
 
 export default function RootLayout({
   children,
@@ -15,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`bg-slate-950`}>
+      <body className={`bg-neutral-950`}>
         {children}
         
        

@@ -142,7 +142,7 @@ export default function SearchLocation() {
             {
                 combinedLocations.length > 0 &&
                 <>
-                <div className='text-white text-2xl'>Hello good morning</div>
+
                     <Card
                         shadow='md'
                         padding="md"
@@ -174,10 +174,6 @@ export default function SearchLocation() {
                                             >
                                                 {loc.state}
                                             </div>
-                                            {/* <div
-                                        >
-                                            {loc.countryCode}
-                                        </div> */}
 
                                             <Avatar
                                                 src={loc.flagPng}
@@ -193,12 +189,12 @@ export default function SearchLocation() {
 
                     </Card>
                 </>
-                
+
 
             }
 
         </div>
     )
 }
-// number | "xs" | "sm" | "md" | "lg" | "xl"
+
 
