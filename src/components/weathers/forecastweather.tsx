@@ -8,14 +8,18 @@ import { useAtom } from "jotai"
 import { useEffect } from "react"
 
 
-export default function ForeCastWeather({ ipData }: { ipData: IPDataInterface } ) {
+export default function ForeCastWeather( ) {
     const [selectedLat,] = useAtom(selectedLatitudeAtom)
     const [selectedLon,] = useAtom(selectedLongitudeAtom)
 
 
     // fetched longitude and latitude of current user location
-    const fetchedLatitude = ipData.latitude
-    const fetchedLongitude = ipData.longitude
+    const { data: coordinates } = useQuery<IPDataInterface>({
+        queryKey: [`https://api.ipdata.co?api-key=${process.env.NEXT_PUBLIC_IPDATA_API_KEY}`],
+    })
+
+    const fetchedLatitude = coordinates?.latitude
+    const fetchedLongitude = coordinates?.longitude
 
 
     /*
@@ -27,7 +31,7 @@ export default function ForeCastWeather({ ipData }: { ipData: IPDataInterface } 
 
     const { data: currentWeather } = useQuery<ForeCastWeatherInterface>({
         queryKey: [`${process.env.NEXT_PUBLIC_5_DAY_3_HRLY_WEATHER_FORECAST_BASE}lat=${selectedLat !== "" ? selectedLat : fetchedLatitude}&lon=${selectedLon !== "" ? selectedLon : fetchedLongitude}&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY}`],
-        enabled: fetchedLatitude !== 0
+        enabled: fetchedLatitude !== undefined
     })
 
     console.log('four date forecast', currentWeather)

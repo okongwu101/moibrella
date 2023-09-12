@@ -10,23 +10,20 @@ import { useEffect, useState } from "react"
 import { IPDataInterface } from "@/lib/ipDataInterface"
 
 
-export default function CurrentWeather( { ipData } : { ipData: IPDataInterface}) {
-
-    console.log('server longitude', ipData.longitude)
+export default function CurrentWeather( ) {
 
 
     const [selectedLat,] = useAtom(selectedLatitudeAtom)
     const [selectedLon,] = useAtom(selectedLongitudeAtom)
 
     // fetched longitude and latitude of current user location
-    const fetchedLatitude = ipData.latitude
-    const fetchedLongitude = ipData.longitude
-
     const { data: coordinates } = useQuery<IPDataInterface>({
         queryKey: [`https://api.ipdata.co?api-key=${process.env.NEXT_PUBLIC_IPDATA_API_KEY}`],
     })
 
-    console.log('client longitude', coordinates?.longitude)
+    const fetchedLatitude = coordinates?.latitude
+    const fetchedLongitude = coordinates?.longitude
+
 
     /*
         Fetch the current weather of the selected location
@@ -37,7 +34,7 @@ export default function CurrentWeather( { ipData } : { ipData: IPDataInterface})
 
     const { data: currentWeather } = useQuery<CurrentWeatherInterface>({
         queryKey: [`${process.env.NEXT_PUBLIC_CURRENT_WEATHER_BASE}lat=${selectedLat !== "" ? selectedLat : fetchedLatitude}&lon=${selectedLon !== "" ? selectedLon : fetchedLongitude}&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY}`],
-        enabled: fetchedLatitude !== 0
+        enabled: fetchedLatitude !== undefined
     })
 
 
@@ -115,13 +112,6 @@ export default function CurrentWeather( { ipData } : { ipData: IPDataInterface})
                 </div>
 
             }
-
-
-            <div>
-                <h1> SERVER LONGITUDE {ipData.longitude}</h1>
-                <h1>CLIENT LONGITUDE {coordinates?.longitude} </h1>
-            </div>
-
 
         </div>
     )

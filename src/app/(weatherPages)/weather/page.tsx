@@ -6,15 +6,6 @@ import ForeCastWeather from "@/components/weathers/forecastweather"
 export default async function WeatherHome() {
 
 
-    // fetch the user current geo coordinates.
-    // cache and revalidate the values every 3 hours
-    const res = await fetch(`https://api.ipdata.co?api-key=${process.env.NEXT_PUBLIC_IPDATA_API_KEY}`, {
-        next: { revalidate: 10800 }
-    })
-
-    const ipData = await res.json()
-
-
 
     return (
         <div className="lg:container mx-auto lg:px-52">
@@ -23,8 +14,8 @@ export default async function WeatherHome() {
             </div>
             <div className="grid grid-col-1 lg:grid-cols-2 gap-6 text-white">
                 <div className="">
-                    <CurrentWeather ipData={ipData} />
-                    <ForeCastWeather ipData={ipData} />
+                    <CurrentWeather />
+                    <ForeCastWeather />
                     
                 </div>
 
