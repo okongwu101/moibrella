@@ -8,7 +8,7 @@ export default async function WeatherHome() {
 
     // fetch the user current geo coordinates.
     // cache and revalidate the values every 3 hours
-    const res = await fetch(`07c94f53e5d6ef09e364c05bc362677e95b8bb904c2491ec2321cab0${process.env.NEXT_PUBLIC_IPDATA_API_KEY}`, {
+    const res = await fetch(`https://api.ipdata.co?api-key=${process.env.NEXT_PUBLIC_IPDATA_API_KEY}`, {
         next: { revalidate: 10800 }
     })
 
