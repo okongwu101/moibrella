@@ -1,35 +1,21 @@
 'use client'
 
-import { selectedLatitudeAtom, selectedLongitudeAtom, fetchedLatitudeAtom, fetchedLongitudeAtom } from "@/lib/atoms"
+import { selectedLatitudeAtom, selectedLongitudeAtom } from "@/lib/atoms"
 import { ForeCastWeatherInterface } from "@/lib/forecastWeatherInterface"
+import { IPDataInterface } from "@/lib/ipDataInterface"
 import { useQuery } from "@tanstack/react-query"
 import { useAtom } from "jotai"
 import { useEffect } from "react"
 
 
-export default function ForeCastWeather() {
+export default function ForeCastWeather({ ipData }: { ipData: IPDataInterface } ) {
     const [selectedLat,] = useAtom(selectedLatitudeAtom)
     const [selectedLon,] = useAtom(selectedLongitudeAtom)
 
-    const [fetchedLatitude, setFetchedLatitude] = useAtom(fetchedLatitudeAtom)
-    const [fetchedLongitude, setFetchedLongitude] = useAtom(fetchedLongitudeAtom)
 
-
-    useEffect(() => {
-        if ("geolocation" in navigator) {
-            const options = {
-                enableHighAccuracy: true,
-                maximumAge: 0
-            }
-            navigator.geolocation.getCurrentPosition(function (position) {
-                setFetchedLongitude(position.coords.longitude)
-                setFetchedLatitude(position.coords.latitude)
-            }, function (error) {
-
-            }, options);
-        }
-
-    }, [setFetchedLatitude, setFetchedLongitude])
+    // fetched longitude and latitude of current user location
+    const fetchedLatitude = ipData.latitude
+    const fetchedLongitude = ipData.longitude
 
 
     /*
@@ -40,7 +26,7 @@ export default function ForeCastWeather() {
     */
 
     const { data: currentWeather } = useQuery<ForeCastWeatherInterface>({
-        queryKey: [`${process.env.NEXT_PUBLIC_5_DAY_3_HRLY_WEATHER_FORECAST_BASE}lat=${selectedLat !== "" ? selectedLat : fetchedLatitude}&lon=${selectedLon !== "" ? selectedLon : fetchedLongitude}&appid=${process.env.NEXT_PUBLIC_API_KEY}`],
+        queryKey: [`${process.env.NEXT_PUBLIC_5_DAY_3_HRLY_WEATHER_FORECAST_BASE}lat=${selectedLat !== "" ? selectedLat : fetchedLatitude}&lon=${selectedLon !== "" ? selectedLon : fetchedLongitude}&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY}`],
         enabled: fetchedLatitude !== 0
     })
 

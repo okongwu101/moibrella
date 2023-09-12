@@ -1,40 +1,24 @@
 'use client'
 
-import { fetchedLatitudeAtom, fetchedLongitudeAtom, selectedLatitudeAtom, selectedLongitudeAtom } from "@/lib/atoms"
+import { selectedLatitudeAtom, selectedLongitudeAtom } from "@/lib/atoms"
 import { usePressureUnit, useTemperatureUnit, useWindSpeedUnit } from "@/lib/hooks"
 import { CurrentWeatherInterface } from "@/lib/interfaces"
 import { Avatar } from "@mantine/core"
 import { useQuery } from "@tanstack/react-query"
 import { useAtom } from "jotai"
 import { useEffect, useState } from "react"
-import Image from 'next/image'
+import { IPDataInterface } from "@/lib/ipDataInterface"
 
 
-export default function CurrentWeather() {
+export default function CurrentWeather( { ipData } : { ipData: IPDataInterface}) {
 
 
     const [selectedLat,] = useAtom(selectedLatitudeAtom)
     const [selectedLon,] = useAtom(selectedLongitudeAtom)
 
-    const [fetchedLatitude, setFetchedLatitude] = useAtom(fetchedLatitudeAtom)
-    const [fetchedLongitude, setFetchedLongitude] = useAtom(fetchedLongitudeAtom)
-
-
-    useEffect(() => {
-        if ("geolocation" in navigator) {
-            const options = {
-                enableHighAccuracy: true,
-                maximumAge: 0
-            }
-            navigator.geolocation.getCurrentPosition(function (position) {
-                setFetchedLongitude(position.coords.longitude)
-                setFetchedLatitude(position.coords.latitude)
-            }, function (error) {
-
-            }, options);
-        }
-
-    }, [setFetchedLatitude, setFetchedLongitude])
+    // fetched longitude and latitude of current user location
+    const fetchedLatitude = ipData.latitude
+    const fetchedLongitude = ipData.longitude
 
     /*
         Fetch the current weather of the selected location
@@ -44,7 +28,7 @@ export default function CurrentWeather() {
     */
 
     const { data: currentWeather } = useQuery<CurrentWeatherInterface>({
-        queryKey: [`${process.env.NEXT_PUBLIC_CURRENT_WEATHER_BASE}lat=${selectedLat !== "" ? selectedLat : fetchedLatitude}&lon=${selectedLon !== "" ? selectedLon : fetchedLongitude}&appid=${process.env.NEXT_PUBLIC_API_KEY}`],
+        queryKey: [`${process.env.NEXT_PUBLIC_CURRENT_WEATHER_BASE}lat=${selectedLat !== "" ? selectedLat : fetchedLatitude}&lon=${selectedLon !== "" ? selectedLon : fetchedLongitude}&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY}`],
         enabled: fetchedLatitude !== 0
     })
 

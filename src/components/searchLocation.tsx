@@ -39,7 +39,7 @@ export default function SearchLocation() {
         /*
             location are fetched using user input
         */
-        const response = await axios.get<FetchedLocationInterface[]>(`${process.env.NEXT_PUBLIC_LOCATION_SEARCH_BASE}${locationValue}&limit=10&appid=${process.env.NEXT_PUBLIC_API_KEY}`);
+        const response = await axios.get<FetchedLocationInterface[]>(`${process.env.NEXT_PUBLIC_LOCATION_SEARCH_BASE}${locationValue}&limit=10&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY}`);
 
         const data = response.data
 
