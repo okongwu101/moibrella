@@ -12,6 +12,8 @@ import { IPDataInterface } from "@/lib/ipDataInterface"
 
 export default function CurrentWeather( { ipData } : { ipData: IPDataInterface}) {
 
+    console.log('server longitude', ipData.longitude)
+
 
     const [selectedLat,] = useAtom(selectedLatitudeAtom)
     const [selectedLon,] = useAtom(selectedLongitudeAtom)
@@ -19,6 +21,12 @@ export default function CurrentWeather( { ipData } : { ipData: IPDataInterface})
     // fetched longitude and latitude of current user location
     const fetchedLatitude = ipData.latitude
     const fetchedLongitude = ipData.longitude
+
+    const { data: coordinates } = useQuery<IPDataInterface>({
+        queryKey: [`https://api.ipdata.co?api-key=${process.env.NEXT_PUBLIC_IPDATA_API_KEY}`],
+    })
+
+    console.log('client longitude', coordinates?.longitude)
 
     /*
         Fetch the current weather of the selected location
@@ -107,6 +115,12 @@ export default function CurrentWeather( { ipData } : { ipData: IPDataInterface})
                 </div>
 
             }
+
+
+            <div>
+                <h1> SERVER LONGITUDE {ipData.longitude}</h1>
+                <h1>CLIENT LONGITUDE {coordinates?.longitude} </h1>
+            </div>
 
 
         </div>
