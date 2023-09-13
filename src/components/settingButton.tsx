@@ -20,7 +20,7 @@ export default function SettingButton(props: settingButtonProps) {
                 onChange={props.onChange}
                 value={props.value}
                 size='xs'
-                transitionDuration={1000}
+                transitionDuration={500}
                 radius="md"
                 orientation='horizontal'
                 classNames={{
@@ -29,7 +29,7 @@ export default function SettingButton(props: settingButtonProps) {
                     root: "",
                     input: "",
                     controlActive: "",
-                    indicator: "bg-neutral-400"
+                    indicator: "bg-rose-400"
                 }}
             />
         </div>

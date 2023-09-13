@@ -33,7 +33,7 @@ export default function Settings() {
 
 
     return (
-        <div className="lg:container mx-auto lg:px-52">
+        <div className="lg:container mx-auto lg:px-52 mt-8">
 
             <div className="text-white font-sans text-base mx-2 px-4">
                 Units
