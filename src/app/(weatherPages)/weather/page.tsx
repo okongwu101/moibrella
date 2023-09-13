@@ -12,15 +12,11 @@ export default async function WeatherHome() {
             <div className="mt-6">
                 <SearchLocation />
             </div>
-            <div className="grid grid-col-1 lg:grid-cols-2 gap-6 text-white">
+            <div className="grid grid-col-1 gap-6 text-white">
                 <div className="">
                     <CurrentWeather />
                     <ForeCastWeather />
                     
-                </div>
-
-                <div>
-                    5 day day forecast
                 </div>
             </div>
         </div>

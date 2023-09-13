@@ -2,12 +2,12 @@
 
 import { selectedLatitudeAtom, selectedLongitudeAtom } from "@/lib/atoms"
 import { usePressureUnit, useTemperatureUnit, useWindSpeedUnit } from "@/lib/hooks"
-import { CurrentWeatherInterface } from "@/lib/interfaces"
 import { Avatar } from "@mantine/core"
 import { useQuery } from "@tanstack/react-query"
 import { useAtom } from "jotai"
 import { useEffect, useState } from "react"
-import { IPDataInterface } from "@/lib/ipDataInterface"
+import { IPDataInterface } from "@/lib/interfaces/ipDataInterface"
+import { CurrentWeatherInterface } from "@/lib/interfaces/currentweatherinterface"
 
 
 export default function CurrentWeather( ) {

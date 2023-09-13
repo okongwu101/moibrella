@@ -1,11 +1,13 @@
 'use client'
 
 import { selectedLatitudeAtom, selectedLongitudeAtom } from "@/lib/atoms"
-import { ForeCastWeatherInterface } from "@/lib/forecastWeatherInterface"
-import { IPDataInterface } from "@/lib/ipDataInterface"
+import { ForeCastWeatherInterface } from "@/lib/interfaces/forecastWeatherInterface"
+import { IPDataInterface } from "@/lib/interfaces/ipDataInterface"
 import { useQuery } from "@tanstack/react-query"
 import { useAtom } from "jotai"
 import { useEffect } from "react"
+import TodayForeCast from "./todayforecast"
+import TomorrowForeCast from "./tomorrowforecast"
 
 
 export default function ForeCastWeather( ) {
@@ -34,12 +36,15 @@ export default function ForeCastWeather( ) {
         enabled: fetchedLatitude !== undefined
     })
 
-    console.log('four date forecast', currentWeather)
+  
 
 
 
     return(
         <div>
+
+            <TodayForeCast />
+            <TomorrowForeCast />
 
         </div>
     )

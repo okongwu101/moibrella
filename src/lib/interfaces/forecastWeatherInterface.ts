@@ -30,9 +30,9 @@ export interface List {
   wind: Wind;
   visibility: number;
   pop: number;
-  rain?: Rain;
   sys: Sys;
   dt_txt: Date;
+  rain?: Rain;
 }
 
 export interface Clouds {
@@ -72,7 +72,6 @@ export interface Weather {
 }
 
 export enum Description {
-  BrokenClouds = "broken clouds",
   LightRain = "light rain",
   ModerateRain = "moderate rain",
   OvercastClouds = "overcast clouds",
