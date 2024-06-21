@@ -3,6 +3,7 @@
 import SettingButton from "@/components/settingButton";
 import { pressureUnitAtom, temperatureUnitAtom, windSpeedUnitAtom } from "@/lib/atoms";
 import { useAtom } from "jotai";
+import { useRouter } from "next/navigation";
 
 
 
@@ -30,6 +31,8 @@ export default function Settings() {
     const [tempValue, setTempValue] = useAtom(temperatureUnitAtom)
     const [windSpeed, setWindSpeed] = useAtom(windSpeedUnitAtom)
     const [atmPressure, setAtmPressure] = useAtom(pressureUnitAtom)
+
+    const router = useRouter()
 
 
     return (
@@ -84,6 +87,12 @@ export default function Settings() {
 
                     </div>
                 </div>
+            </div>
+
+            <div className="flex justify-end">
+                <button type="button" className="bg-red-400 px-2 py-2" onClick={() => router.back()}>
+                    Go back
+                </button>
             </div>
 
         </div>
